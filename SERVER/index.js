@@ -30,7 +30,7 @@ console.log("Allowed URLS:",allowedOrigins); // Debugging: Check if the frontend
 
 // 🔧 Middleware to handle CORS
 app.use(cors({
-  origin:["http://localhost:5173", "*"],
+  origin:true,
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // ✅ Allow sending cookies with requests
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // ✅ Allow these HTTP methods
@@ -61,7 +61,8 @@ app.get("/ok", (req, res) => {
 const io = new Server(server, {
   pingTimeout: 60000, // ⏳ Set timeout for inactive users (1 minute)
   cors: {
-    origin: ["http://localhost:5173", "*"], // ✅ Allow requests from the frontend URL
+    origin: true, // ✅ Allow requests from the frontend URL
+    // origin: ["http://localhost:5173", "*"], // ✅ Allow requests from the frontend URL
     methods: ["GET", "POST"], // ✅ Allow only these methods
   },
 });
