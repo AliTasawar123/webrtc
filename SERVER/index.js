@@ -23,27 +23,24 @@ const PORT = process.env.PORT || 8000;
 // 📡 Create an HTTP server to work with Express (needed for WebSockets)
 const server = createServer(app);
 
-// 🌍 Allowed frontend origins for CORS (Cross-Origin Resource Sharing)
-const allowedOrigins = [process.env.FRONTEND_URL]; 
-console.log("Allowed URLS:",allowedOrigins); // Debugging: Check if the frontend URL is loaded properly
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "https://webrtc-two-rho.vercel.app",  // ✅ explicitly add your frontend
+  "http://localhost:5173",              // ✅ optional for local dev
+];
 
-
-// 🔧 Middleware to handle CORS
 app.use(cors({
-  origin:true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // ✅ Allow sending cookies with requests
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // ✅ Allow these HTTP methods
-  
-  // origin: function (origin, callback) { 
-  //   if (!origin || allowedOrigins.includes(origin)) { 
-  //     callback(null, true); // ✅ Allow the request if it's from an allowed origin
-  //   } else {
-  //     callback(new Error('Not allowed by CORS')); // ❌ Block requests from unknown origins
-  //   }
-  // },
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
-
 // 🛠 Middleware for handling JSON requests and cookies
 app.use(express.json()); // Enables parsing of JSON request bodies
 app.use(cookieParser()); // Enables reading cookies in HTTP requests
