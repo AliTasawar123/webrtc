@@ -1,10 +1,8 @@
 import User from "../schema/userSchema.js";
 import jwt from "jsonwebtoken";
 
-// Get all users (excluding current logged-in user)
 export const getAllUsers = async (req, res) => {
     const currentUserID = req.user?._conditions?._id;
-   // console.log("current user",currentUserID);
     if (!currentUserID) return res.status(401).json({ success: false, message: "Unauthorized." });
     try {
         const users = await User.find({ _id: { $ne: currentUserID } }, "profilepic email username");
@@ -13,7 +11,7 @@ export const getAllUsers = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-// Search user by username or email
+
 export const getUserByUsernameOrEmail = async (req, res) => {
     const { query } = req.query;
     if (!query) return res.status(400).json({ success: false, message: "Query is required." });
@@ -32,7 +30,6 @@ export const getUserByUsernameOrEmail = async (req, res) => {
     }
 };
 
-// Get user by ID
 export const getUserById = async (req, res) => {
     const { id } = req.params;
 

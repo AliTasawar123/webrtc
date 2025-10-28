@@ -32,8 +32,6 @@ const AuthForm = ({ type }) => {
         }
         setLoading(true);
         try {
-
-            // const endpoint = type === 'signup' ? '/auth/signup' : '/auth/login';
             const endpoint = type === 'signup' ? '/auth/signup' : '/auth/login';
             console.log("at least tried", type);
             console.log(formData, endpoint, import.meta.env.VITE_API_BASE_URL);
@@ -46,8 +44,7 @@ const AuthForm = ({ type }) => {
             if (type === 'login') {
                 updateUser(response.data)
                 localStorage.setItem('userData', JSON.stringify(response.data));
-                // Save token in cookies
-                const date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+                const date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
                 const expires = "expires=" + date.toUTCString();
                 document.cookie = `jwt=${response.data.token}; path=/; ${expires}`;
                 navigate('/')

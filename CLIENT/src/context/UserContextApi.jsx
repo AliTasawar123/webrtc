@@ -1,11 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-// Create the context
 const UserContext = createContext();
 
-// Provider component to wrap around your app
 export const UserProvider = ({ children }) => {
-    // Initialize state with localStorage data to prevent flickering issues
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem("userData");
         return storedUser ? JSON.parse(storedUser) : null;
@@ -22,7 +19,6 @@ export const UserProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    // Function to update user data
     const updateUser = (newUserData) => {
         setUser(newUserData);
         localStorage.setItem("userData", JSON.stringify(newUserData));
@@ -35,7 +31,6 @@ export const UserProvider = ({ children }) => {
     );
 };
 
-// Custom hook for consuming the context
 export const useUser = () => {
     const context = useContext(UserContext);
     if (!context) {
