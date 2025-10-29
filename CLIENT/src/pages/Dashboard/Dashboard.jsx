@@ -500,12 +500,12 @@ const Dashboard = () => {
               <Lottie animationData={wavingAnimation} loop autoplay />
             </div>
             <div>
-              <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text flex items-center gap-2">
+              <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-black text-transparent bg-clip-text flex items-center gap-2">
                 Hi! Recuiter
               </h1>
               <p className="text-lg text-gray-300 mt-2 flex items-center gap-2">
-                Email :
-                <span className='font-bold bg-gradient-to-r from-blue-400 to-purple-500'>
+                User :
+                <span className='font-bold bg-gradient-to-r from-blue-400 to-black'>
                   {user?.username || "Guest"}! 
                 </span>
                 <FaVideoCamera />✨

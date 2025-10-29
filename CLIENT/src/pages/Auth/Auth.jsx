@@ -33,8 +33,6 @@ const AuthForm = ({ type }) => {
         setLoading(true);
         try {
             const endpoint = type === 'signup' ? '/auth/signup' : '/auth/login';
-            console.log("at least tried", type);
-            console.log(formData, endpoint, import.meta.env.VITE_API_BASE_URL);
 
             const response = await apiClient.post(endpoint, formData);
             toast.success(response.data.message || 'Success!');
@@ -58,9 +56,9 @@ const AuthForm = ({ type }) => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-purple-800 text-white">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-black text-white">
             <div className="bg-white text-gray-900 p-8 rounded-lg shadow-white shadow-2xl w-full max-w-md m-2">
-                <h2 className="text-3xl font-extrabold text-center mb-6">{type === 'signup' ? 'SignUp Call' : 'Login Call'}</h2>
+                <h2 className="text-3xl font-extrabold text-center mb-6">{type === 'signup' ? ' SignUp ' : ' Login '}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {type === 'signup' && (
                         <>
